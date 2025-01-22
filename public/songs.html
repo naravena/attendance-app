@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Canciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="songs.js"></script>
+</head>
+<body class="bg-gray-100 p-4">
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Lista de Canciones</h1>
+    <nav class="mb-4">
+        <a href="index.html" class="text-blue-500 underline">Volver a la asistencia</a>
+    </nav>
+    <table class="table-auto w-full bg-white rounded shadow-md">
+        <thead>
+        <tr>
+            <th class="px-4 py-2">Título</th>
+            <th class="px-4 py-2">Artista</th>
+            <th class="px-4 py-2">Última vez cantada</th>
+            <th class="px-4 py-2">Tonalidad Nico</th>
+            <th class="px-4 py-2">Tonalidad Marta</th>
+            <th class="px-4 py-2">Tonalidad Vane</th>
+        </tr>
+        </thead>
+        <tbody id="songs-table"></tbody>
+    </table>
+</div>
+</body>
+</html>

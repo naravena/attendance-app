@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Nueva Canción</title>
+    <script src="js/addnewsong.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Añadir Nueva Canción</h1>
+    <form id="new-song-form" class="bg-white p-4 rounded shadow-md">
+        <div class="grid grid-cols-1 gap-4">
+            <label for="title">Título de la canción:</label>
+            <input type="text" id="title" class="p-2 border rounded" required>
+
+            <label for="artist">Artista:</label>
+            <select id="artist" class="p-2 border rounded" required>
+                <option value="">Seleccione un artista</option>
+            </select>
+
+            <label for="lyrics">Letra y acordes:</label>
+            <textarea id="lyrics" rows="6" class="p-2 border rounded" required></textarea>
+
+            <label for="search_link">Enlace para buscarla en lacuerda:</label>
+            <input type="url" id="search_link" class="p-2 border rounded">
+
+            <label for="youtube_link">Enlace a YouTube:</label>
+            <input type="url" id="youtube_link" class="p-2 border rounded">
+        </div>
+        <button type="submit" class="mt-4 p-2 bg-blue-500 text-white rounded">Guardar Canción</button>
+    </form>
+    <nav class="mt-4">
+        <a href="index.html" class="text-blue-500 underline">Volver al Inicio</a>
+        <a href="newsetlist.html" class="text-blue-500 underline ml-4">Nuevo Setlist</a>
+    </nav>
+</div>
+</body>
+</html>

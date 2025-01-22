@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Miembro</title>
+    <script src="js/addnewmember.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Añadir Miembro</h1>
+    <form id="add-member-form" class="bg-white p-4 rounded shadow-md">
+        <div class="grid grid-cols-1 gap-4">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" class="p-2 border rounded" required>
+
+            <label for="instrument">Instrumento:</label>
+            <select id="instrument" class="p-2 border rounded" multiple required>
+                <option value="guitarra">Guitarra</option>
+                <option value="piano">Piano</option>
+                <option value="voz">Voz</option>
+                <option value="bajo">Bajo</option>
+            </select>
+
+            <label for="is-director">¿Es director?</label>
+            <select id="is-director" class="p-2 border rounded" required>
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+            </select>
+
+            <label for="birthdate">Fecha de nacimiento:</label>
+            <input type="date" id="birthdate" class="p-2 border rounded" required>
+        </div>
+        <button class="mt-4 p-2 bg-blue-500 text-white rounded">Añadir Miembro</button>
+    </form>
+    <nav class="mt-4">
+        <a href="index.html" class="text-blue-500 underline">Volver al Inicio</a>
+    </nav>
+</div>
+</body>
+</html>
