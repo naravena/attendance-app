@@ -1,5 +1,5 @@
-const axios = require('axios');
-const fs = require('fs');
+import fs from 'fs';
+import axios from 'axios';
 
 // Ruta al archivo JSON
 const filePath = './songs.json';
@@ -48,8 +48,8 @@ function transformSongData(song) {
         title: song.title || '',
         artist_id: artistMapping[song.artist] || null,
         lyrics: song.full_text_with_comment || '',
-        search_link: 'https://www.youtube.com/watch?v=',
-        youtube_link: 'https://www.youtube.com/watch?v='
+        search_link: 'https://acordes.lacuerda.net/busca.php?canc=0&exp=' + song.title,
+        youtube_link: 'https://www.youtube.com/results?search_query='+ song.title
     };
 }
 

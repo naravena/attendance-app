@@ -44,9 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             youtube_link,
         };
 
-        console.log("songData");
-        console.log(songData);
-
         try {
             const res = await fetch('/api/new-song', {
                 method: 'POST',
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error('Error al crear la canción');
             }
 
-            const result = await res.json();
             alert('Canción creada exitosamente!');
             form.reset(); // Limpiar el formulario
         } catch (error) {

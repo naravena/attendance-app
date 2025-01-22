@@ -1,4 +1,5 @@
-const axios = require('axios');
+// addMembersTurso.js
+import { db } from  './db.js';
 
 const members = [
     { name: "Nico", instrument: "Guitarra y Voz", is_director: true, birthdate: "1985-01-01" },
@@ -8,20 +9,21 @@ const members = [
     { name: "Luis", instrument: "Bajo", is_director: true, birthdate: "1988-05-01" }
 ];
 
-const API_URL = 'http://localhost:3000/api/new-member';
-
 async function addMembers() {
     for (const member of members) {
         try {
-            const response = await axios.post(API_URL, {
-                name: member.name,
-                instrument: member.instrument,
-                is_director: member.is_director,
-                birthdate: member.birthdate
+            const result = await db.execute({
+                sql: `INSERT INTO members (name, instrument, is_director, birthdate) VALUES (?, ?, ?, ?)`,
+                args: [
+                    member.name,
+                    member.instrument,
+                    member.is_director,
+                    member.birthdate
+                ]
             });
-            console.log(`Miembro añadido: ${member.name} - ID: ${response.data.id}`);
+            console.log(`Miembro añadido: ${member.name} - ID: ${result.lastInsertRowid}`);
         } catch (error) {
-            console.error(`Error al añadir miembro: ${member.name}`, error.response?.data || error.message);
+            console.error(`Error al añadir miembro: ${member.name}`, error.message);
         }
     }
 }

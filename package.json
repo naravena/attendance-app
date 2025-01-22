@@ -1,9 +1,32 @@
 {
   "dependencies": {
+    "@libsql/client": "^0.14.0",
     "axios": "^1.7.9",
     "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "multer": "^1.4.5-lts.1",
     "sqlite3": "^5.1.7"
-  }
+  },
+  "name": "attendance-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naravena/attendance-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/naravena/attendance-app/issues"
+  },
+  "homepage": "https://github.com/naravena/attendance-app#readme",
+  "description": ""
 }
