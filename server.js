@@ -1,8 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
 const { db, setupDatabase } = require('./dbSetup');
 
 const app = express();
@@ -12,9 +9,6 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Configuración para subida de archivos
-const upload = multer({ dest: path.join(__dirname, 'public/songs/lyrics_and_chords') });
 
 // Configurar la base de datos
 setupDatabase();
