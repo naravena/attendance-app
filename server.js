@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { db } from './db.js';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -15,15 +15,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const setupDatabase = async () => {
   try {
     // Eliminar tablas existentes
-    const dropTables = [
-      'DROP TABLE IF EXISTS attendance',
-      'DROP TABLE IF EXISTS songs',
-      'DROP TABLE IF EXISTS artist',
-      'DROP TABLE IF EXISTS members',
-    ];
-    for (const query of dropTables) {
-      await db.execute(query);
-    }
+    // const dropTables = [
+    //   'DROP TABLE IF EXISTS attendance',
+    //   'DROP TABLE IF EXISTS songs',
+    //   'DROP TABLE IF EXISTS artist',
+    //   'DROP TABLE IF EXISTS members',
+    // ];
+    //for (const query of dropTables) {
+    //  await db.execute(query);
+    //}
     console.log('Tablas eliminadas con éxito.');
 
     // Crear tablas
@@ -303,4 +303,4 @@ app.listen(port, () => {
   console.log(`Servidor ejecutándose en http://localhost:${port}`);
 });
 
-module.exports = app;
+export default app;
