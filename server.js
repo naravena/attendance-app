@@ -303,3 +303,4 @@ app.listen(port, () => {
   console.log(`Servidor ejecutándose en http://localhost:${port}`);
 });
 
+module.exports = app;
