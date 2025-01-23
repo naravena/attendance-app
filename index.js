@@ -1,4 +1,4 @@
-// server.js
+// index.js
 import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './db.js';
