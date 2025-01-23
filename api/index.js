@@ -1,10 +1,8 @@
-// index.js
 import express from 'express';
 import bodyParser from 'body-parser';
-import { db } from './db.js';
+import { db } from '../db.js';
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -14,82 +12,51 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configuración de la base de datos
 const setupDatabase = async () => {
   try {
-    // Eliminar tablas existentes
-    // const dropTables = [
-    //   'DROP TABLE IF EXISTS attendance',
-    //   'DROP TABLE IF EXISTS songs',
-    //   'DROP TABLE IF EXISTS artist',
-    //   'DROP TABLE IF EXISTS members',
-    // ];
-    //for (const query of dropTables) {
-    //  await db.execute(query);
-    //}
-    console.log('Tablas eliminadas con éxito.');
+     //Eliminar tablas existentes
+    //  const dropTables = [
+    //    'DROP TABLE IF EXISTS attendance',
+    //    'DROP TABLE IF EXISTS songs',
+    //    'DROP TABLE IF EXISTS artist',
+    //    'DROP TABLE IF EXISTS members',
+    //  ];
+    // for (const query of dropTables) {
+    //   await db.execute(query);
+    // }
+    // console.log('Tablas eliminadas con éxito.');
 
     // Crear tablas
-    await db.execute(`CREATE TABLE IF NOT EXISTS artist (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT UNIQUE
-    )`);
-
-    await db.execute(`CREATE TABLE IF NOT EXISTS songs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      title TEXT,
-      artist_id INTEGER,
-      last_sung TEXT,
-      lyrics TEXT,
-      search_link TEXT,
-      youtube_link TEXT,
-      FOREIGN KEY (artist_id) REFERENCES artist(id)
-    )`);
-
-    await db.execute(`CREATE TABLE IF NOT EXISTS attendance (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      date TEXT,
-      director TEXT,
-      convocados TEXT,
-      songs TEXT
-    )`);
-
-    await db.execute(`CREATE TABLE IF NOT EXISTS members (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT,
-      instrument TEXT,
-      is_director BOOLEAN,
-      birthdate TEXT
-    )`);
-    console.log('Tablas creadas con éxito.');
-
-    // Insertar datos iniciales en la tabla `artist`
-    const artists = [
-      'Alisha Quinonez',
-      'Bethel',
-      'Danilo Montero',
-      'Desconocido',
-      'Eccos',
-      'Elevation Worship',
-      'En Espiritu y en Verdad',
-      'Evan Craft',
-      'Generación 12',
-      'Hillsong',
-      'Julio Melgar',
-      'Majo Solís',
-      'Marcos Brunet',
-      'Maverick City Music',
-      'Sarai Rivera',
-      'Un Corazón',
-      'Rescate',
-      'Marcos Witt',
-      'Toma tu lugar',
-      'Majo y Dan',
-      'Bethel Music',
-      'Ingrid Rosario',
-      'Rojo',
-    ];
-
-    for (const artist of artists) {
-      await db.execute(`INSERT OR IGNORE INTO artist (name) VALUES (?)`, [artist]);
-    }
+    //await db.execute(`CREATE TABLE IF NOT EXISTS artist (
+    //  id INTEGER PRIMARY KEY AUTOINCREMENT,
+    //  name TEXT UNIQUE
+    //)`);
+//
+    //await db.execute(`CREATE TABLE IF NOT EXISTS songs (
+    //  id INTEGER PRIMARY KEY AUTOINCREMENT,
+    //  title TEXT,
+    //  artist_id INTEGER,
+    //  last_sung TEXT,
+    //  lyrics TEXT,
+    //  search_link TEXT,
+    //  youtube_link TEXT,
+    //  FOREIGN KEY (artist_id) REFERENCES artist(id)
+    //)`);
+//
+    //await db.execute(`CREATE TABLE IF NOT EXISTS attendance (
+    //  id INTEGER PRIMARY KEY AUTOINCREMENT,
+    //  date TEXT,
+    //  director TEXT,
+    //  convocados TEXT,
+    //  songs TEXT
+    //)`);
+//
+    //await db.execute(`CREATE TABLE IF NOT EXISTS members (
+    //  id INTEGER PRIMARY KEY AUTOINCREMENT,
+    //  name TEXT,
+    //  instrument TEXT,
+    //  is_director BOOLEAN,
+    //  birthdate TEXT
+    //)`);
+    //console.log('Tablas creadas con éxito.');
     console.log('Datos iniciales insertados en la tabla artist.');
   } catch (error) {
     console.error('Error durante la configuración de la base de datos:', error.message);
@@ -97,7 +64,7 @@ const setupDatabase = async () => {
 };
 
 // Llamar a la función para configurar la base de datos
-setupDatabase();
+//setupDatabase();
 
 // Rutas de la API
 
@@ -152,7 +119,7 @@ app.get('/api/next-setlist', async (req, res) => {
     if (result.rows.length > 0) {
       res.json(result.rows[0]);
     } else {
-      res.status(404).json({ error: 'No hay setlist próximo disponible.' });
+      res.status(404).json({ error: 'No hay setlist próximo disponible cercano a: ' + today});
     }
   } catch (err) {
     console.error('Error al obtener el siguiente setlist:', err.message);
@@ -190,9 +157,11 @@ app.post('/api/artists', async (req, res) => {
     return res.status(400).json({ error: 'El nombre del artista es obligatorio.' });
   }
 
+  // Convertir BigInt a número normal
+
   try {
     const result = await db.execute(`INSERT INTO artist (name) VALUES (?)`, [name]);
-    res.json({ id: result.lastInsertRowid });
+    res.json({ id: Number(result.lastInsertRowid) });
   } catch (err) {
     console.error('Error al añadir el artista:', err.message);
     res.status(500).json({ error: err.message });
@@ -212,7 +181,8 @@ app.post('/api/new-member', async (req, res) => {
         `INSERT INTO members (name, instrument, is_director, birthdate) VALUES (?, ?, ?, ?)`,
         [name, instrument, is_director === 'true', birthdate]
     );
-    res.json({ id: result.lastInsertRowid });
+
+    res.json({ id: Number(result.lastInsertRowid) });
   } catch (err) {
     console.error('Error al añadir el miembro:', err.message);
     res.status(500).json({ error: err.message });
@@ -235,7 +205,8 @@ app.post('/api/new-setlist', async (req, res) => {
         `INSERT INTO attendance (date, director, convocados, songs) VALUES (?, ?, ?, ?)`,
         [date, director, formattedConvocados, formattedSongs]
     );
-    res.json({ id: result.lastInsertRowid });
+
+    res.json({ id: Number(result.lastInsertRowid) });
   } catch (err) {
     console.error('Error al añadir el setlist:', err.message);
     res.status(500).json({ error: err.message });
@@ -260,12 +231,9 @@ app.post('/api/new-song', async (req, res) => {
       args: [title, artist_id, lyrics, search_link, youtube_link],
     });
 
-    // Convertir BigInt a número normal
-    const insertedId = Number(result.lastInsertRowid);
-
     res.status(201).json({
       message: 'Canción creada exitosamente',
-      id: insertedId
+      id: Number(result.lastInsertRowid)
     });
   } catch (error) {
     console.error('Error al crear la canción:', error);
@@ -298,9 +266,9 @@ app.get('/api/song/:id', async (req, res) => {
   }
 });
 
-// Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor ejecutándose en http://localhost:${port}`);
-});
+//// Iniciar el servidor
+//app.listen(port, () => {
+//  console.log(`Servidor ejecutándose en http://localhost:${port}`);
+//});
 
 export default app;
