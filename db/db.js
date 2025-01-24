@@ -12,17 +12,4 @@ const db = createClient({
     authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-// Función para ejecutar consultas como promesas
-const runQuery = (query, params = []) => {
-    return new Promise((resolve, reject) => {
-        db.execute(query, params, function (err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-};
-
-export { db, runQuery };
+export { db };

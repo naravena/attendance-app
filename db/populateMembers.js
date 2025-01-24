@@ -1,5 +1,5 @@
 // addMembersTurso.js
-import { db } from  './db.js';
+import { db } from './db.js';
 
 const members = [
     { name: "Nico", instrument: "Guitarra y Voz", is_director: true, birthdate: "1985-01-01" },
