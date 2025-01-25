@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar los convocados
         if (setlist.convocados) {
             const convocadosArray = setlist.convocados.split(', ');
-            setlistConvocados.innerHTML = `<strong>Convocados:</strong> ${convocadosArray.join(', ')}`;
+            setlistConvocados.innerHTML = `${convocadosArray.join(', ')}`;
         } else {
             setlistConvocados.textContent = 'Convocados: Información no disponible';
         }
