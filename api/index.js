@@ -31,6 +31,17 @@ app.get('/api/members', async (req, res) => {
   }
 });
 
+// Obtener todos los miembros
+app.get('/api/directors', async (req, res) => {
+  try {
+    const result = await db.execute('SELECT * FROM members where directorId=1');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error al obtener miembros:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Obtener todas las canciones
 app.get('/api/songs', async (req, res) => {
   try {

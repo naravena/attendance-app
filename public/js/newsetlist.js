@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    await fetchOptions('/api/members', directorSelect);
+    await fetchOptions('/api/directors', directorSelect);
     await fetchOptions('/api/songs', songsSelect);
     await fetchOptions('/api/members', convocadosSelect);
 

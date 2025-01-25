@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <h1 class="text-2xl font-bold">${song.title}</h1>
       <p><strong>Artista:</strong> ${song.artist}</p>
       <p><strong>Letra y acordes:</strong></p>
-      <pre class="bg-gray-100 p-2 rounded mt-2 overflow-visible">${song.lyrics}</pre>
+      <pre class="bg-gray-100 p-2 rounded mt-2 overflow-visible text-black">${song.lyrics}</pre>
       <p><strong>Enlace para buscarla en lacuerda:</strong> 
         <a href="${song.search_link}" target="_blank" class="text-blue-500 underline">${song.search_link || 'No disponible'}</a>
       </p>
