@@ -34,7 +34,7 @@ app.get('/api/members', async (req, res) => {
 // Obtener todos los miembros
 app.get('/api/directors', async (req, res) => {
   try {
-    const result = await db.execute('SELECT * FROM members where directorId=1');
+    const result = await db.execute('SELECT * FROM members WHERE is_director=1');
     res.json(result.rows);
   } catch (err) {
     console.error('Error al obtener miembros:', err.message);
